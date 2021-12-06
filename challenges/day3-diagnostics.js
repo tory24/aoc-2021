@@ -1,7 +1,5 @@
 import fs from "fs";
-let diagnostic = fs
-  .readFileSync("/Users/tmoscaritolo/Desktop/aoc-2021/public/day3.txt", "utf8")
-  .split("\n");
+let diagnostic = fs.readFileSync("../public/day3.txt", "utf8").split("\n");
 
 /*
  * Part 1
