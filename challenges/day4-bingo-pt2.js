@@ -41,17 +41,20 @@ let finalDrawnNum;
 
 numDrawn.forEach((drawnNum, numDrawnIndex) => {
   if (bingoWinner) return;
-  newBingoArray.forEach((array, bingoIndex) => {
+  newBingoArray.forEach((card, bingoIndex) => {
     if (bingoWinner) return;
     var bingoCardTally = [];
 
-    array.map((line, lineIndex) => {
+    card.forEach((line, lineIndex) => {
       if (bingoWinner) return;
 
       for (let i = 0; i < line.length; i++) {
-        if (line[i] === drawnNum) line[i] = true;
-        if (newBingoArray[bingoIndex][lineIndex][i] === true)
+        if (line[i] === drawnNum) {
+          line[i] = true;
+        }
+        if (line[i] === true) {
           bingoCardTally[i] ? bingoCardTally[i]++ : (bingoCardTally[i] = 1);
+        }
       }
 
       if (line.every((x) => x === true) || bingoCardTally.includes(5)) {
@@ -65,9 +68,14 @@ numDrawn.forEach((drawnNum, numDrawnIndex) => {
 
 console.log(
   "we have bingo",
+  finalBoardIndex,
   newBingoArray[finalBoardIndex]
     .flat()
     .filter((x) => x !== true)
     .map((x) => parseInt(x))
     .reduce((prevVal, currVal) => prevVal + currVal) * finalDrawnNum
 );
+
+// Iterate through each card
+// Stop when you get bingo
+// Card with latest bingo is final card

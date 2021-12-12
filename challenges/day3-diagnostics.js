@@ -7,14 +7,12 @@ let diagnostic = fs.readFileSync("../public/day3.txt", "utf8").split("\n");
  */
 
 function findMostCommonNum(array) {
-  const commonArr = [];
+  const commonArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   const unCommonArr = [];
   array.forEach((number) => {
-    number.split("").forEach((number, index) => {
-      if (number == 1) {
-        commonArr[index] ? commonArr[index]++ : (commonArr[index] = 1);
-      }
-    });
+    number
+      .split("")
+      .forEach((number, index) => number == 1 && commonArr[index]++);
   });
 
   commonArr.forEach((number, index) => {
@@ -43,14 +41,13 @@ let value = 0;
 let oxygenArray = [...diagnostic];
 let c02Array = [...diagnostic];
 
-function filterArray(array, common, unCommon) {
+function filterArray(array, unCommon, common) {
   array[0].split("").forEach((num, index) => {
     if (array.length === 1) return;
     array.forEach((number) => number[index] == 1 && value++);
-    value < array.length / 2 ? (value = common) : (value = unCommon);
-    for (let arrIndex = array.length - 1; arrIndex >= 0; --arrIndex) {
+    value < array.length / 2 ? (value = unCommon) : (value = common);
+    for (let arrIndex = array.length - 1; arrIndex >= 0; --arrIndex)
       parseInt(array[arrIndex][index]) !== value && array.splice(arrIndex, 1);
-    }
   });
   return parseInt(array, 2);
 }
